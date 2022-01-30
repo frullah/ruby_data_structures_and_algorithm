@@ -18,6 +18,7 @@ module RubyDataStructuresAndAlgorithm
       include_examples "expression matcher", "-(1+2)", -(1+2)
       include_examples "expression matcher", "-(1+2*3)", -(1+2*3)
       include_examples "expression matcher", "-(1+2*3/2)", -(1+2*3/2)
+      include_examples "expression matcher", "-2+ 1", -2+1
     end
   end
 end

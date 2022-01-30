@@ -15,7 +15,8 @@ module RubyDataStructuresAndAlgorithm
         if expression[0] == '('
           evaluate_math_expression expression[1...-1], operator == '-'
         else
-          evaluate_simple_math_expression expression, negative
+          # TODO: find a better way to than concat operator with expression
+          evaluate_simple_math_expression "#{operator}#{expression}", negative
         end
       end
     end
