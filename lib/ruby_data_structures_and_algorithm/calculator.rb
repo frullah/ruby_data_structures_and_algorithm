@@ -11,9 +11,15 @@ module RubyDataStructuresAndAlgorithm
     end
 
     private def evaluate_math_expression(expression, negative = false)
+      # TODO: why it should return [0] if expression is an empty string ?
+      return [0] if expression == ""
+
       expression.scan(%r{(#{OPERATOR_REGEX})?(.+)}).map do |(operator, expression)|
         if expression[0] == '('
-          evaluate_math_expression expression[1...-1], operator == '-'
+          # TODO: find a better way to handle parentheses expression
+          matches = expression.match(/\((.+)\)(.+)?/)
+          evaluate_math_expression(matches[1], operator == '-') +
+            evaluate_math_expression(matches[2] || "", operator == '-')
         else
           # TODO: find a better way to than concat operator with expression
           evaluate_simple_math_expression "#{operator}#{expression}", negative
@@ -22,6 +28,8 @@ module RubyDataStructuresAndAlgorithm
     end
 
     private def evaluate_simple_math_expression(expression, negative = false)
+      return 0 if expression.nil? || expression == ""
+      
       stack = []
       operator = nil
 
